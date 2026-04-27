@@ -1,17 +1,14 @@
 import { useState } from 'react'
+import SearchBar from './components/SearchBar'
 import WeatherCard from './components/WeatherCard'
 import './App.css'
 
 export default function App() {
-  const [city, setCity] = useState('')
   const [weather, setWeather] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const fetchWeather = async (e) => {
-    e.preventDefault()
-    if (!city.trim()) return
-
+  const fetchWeather = async (city) => {
     setLoading(true)
     setError(null)
     setWeather(null)
@@ -42,26 +39,7 @@ export default function App() {
         <p className="app-subtitle">ค้นหาสภาพอากาศทั่วโลก</p>
       </header>
 
-      <form className="search-form" onSubmit={fetchWeather}>
-        <div className="search-wrap">
-          <span className="search-icon">🔍</span>
-          <input
-            className="search-input"
-            type="text"
-            placeholder="พิมพ์ชื่อเมือง เช่น Bangkok, London..."
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            disabled={loading}
-          />
-          <button
-            className={`search-btn${loading ? ' loading' : ''}`}
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? <span className="spinner" /> : 'ค้นหา'}
-          </button>
-        </div>
-      </form>
+      <SearchBar onSearch={fetchWeather} loading={loading} />
 
       {error && (
         <div className="error-box">
