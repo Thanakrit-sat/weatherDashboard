@@ -1,0 +1,240 @@
+/* ── WeatherCard wrapper ── */
+.wc-root {
+  width: 100%;
+  max-width: 360px;
+  margin: 8px auto 0;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease, transform .5s ease;
+  z-index: 1;
+}
+
+.wc-root.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wc-card {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Top gradient section ── */
+.wc-top {
+  padding: 32px 28px 24px;
+  color: #fff;
+  position: relative;
+}
+
+.wc-location {
+  font-size: 13px;
+  font-weight: 300;
+  opacity: .8;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.wc-city {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.wc-temp-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.wc-temp {
+  font-size: 80px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -4px;
+}
+
+.wc-temp sup {
+  font-size: 28px;
+  letter-spacing: 0;
+  vertical-align: super;
+}
+
+.wc-icon-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 8px;
+  gap: 4px;
+}
+
+.wc-icon img {
+  display: block;
+  width: 52px;
+  height: 52px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+}
+
+.wc-cond-label {
+  font-size: 13px;
+  font-weight: 300;
+  opacity: .9;
+  white-space: nowrap;
+}
+
+.wc-feels {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  opacity: .75;
+}
+
+.wc-range {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 300;
+  opacity: .8;
+  margin-top: 2px;
+}
+
+/* ── Bottom stats grid ── */
+.wc-bottom {
+  background: #fff;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.wc-stat {
+  padding: 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wc-stat:nth-child(odd) {
+  padding-right: 20px;
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.wc-stat:nth-child(even) {
+  padding-left: 20px;
+}
+
+.wc-stat:nth-child(1),
+.wc-stat:nth-child(2) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.wc-stat-label {
+  font-size: 11px;
+  color: #8e8e93;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.wc-stat-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1c1c1e;
+  line-height: 1.2;
+}
+
+.wc-stat-unit {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.wc-stat-sub {
+  font-size: 12px;
+  color: #8e8e93;
+  margin-top: 3px;
+}
+
+/* ── Humidity bar ── */
+.wc-hum-bar {
+  height: 3px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.wc-hum-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width .8s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ── Sunrise / sunset row ── */
+.wc-sun {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  padding-top: 16px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.wc-sun-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.wc-sun-icon {
+  font-size: 18px;
+}
+
+.wc-sun-label {
+  font-size: 11px;
+  color: #8e8e93;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.wc-sun-time {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  .wc-bottom {
+    background: #1c1c1e;
+  }
+
+  .wc-stat-label,
+  .wc-stat-sub,
+  .wc-sun-label {
+    color: #636366;
+  }
+
+  .wc-stat-value,
+  .wc-sun-time {
+    color: #f2f2f7;
+  }
+
+  .wc-stat:nth-child(odd) {
+    border-right-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .wc-stat:nth-child(1),
+  .wc-stat:nth-child(2) {
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .wc-hum-bar {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .wc-sun {
+    border-top-color: rgba(255, 255, 255, 0.07);
+  }
+}
