@@ -1,17 +1,20 @@
 import { useState } from 'react'
 import SearchBar from './components/SearchBar'
 import WeatherCard from './components/WeatherCard'
+import ForecastBoard from './components/ForecastBoard'
 import './App.css'
 
 export default function App() {
-  const [weather, setWeather] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [weather, setWeather]           = useState(null)
+  const [searchedCity, setSearchedCity] = useState(null)
+  const [loading, setLoading]           = useState(false)
+  const [error, setError]               = useState(null)
 
   const fetchWeather = async (city) => {
     setLoading(true)
     setError(null)
     setWeather(null)
+    setSearchedCity(null)
 
     try {
       const res = await fetch(
@@ -20,6 +23,7 @@ export default function App() {
       if (!res.ok) throw new Error('ไม่พบเมืองนี้ ลองใหม่อีกครั้ง')
       const data = await res.json()
       setWeather(data)
+      setSearchedCity(city)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -47,7 +51,16 @@ export default function App() {
         </div>
       )}
 
-      {weather && <WeatherCard data={weather} />}
+      {weather && (
+        <div className="app-dashboard">
+          <div className="app-left">
+            <WeatherCard data={weather} />
+          </div>
+          <div className="app-right">
+            <ForecastBoard city={searchedCity} />
+          </div>
+        </div>
+      )}
 
       {!weather && !error && !loading && (
         <div className="empty-state">

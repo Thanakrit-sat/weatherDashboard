@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
 
-/* Base */
+/* ── Reset & base ── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +14,7 @@ body {
   color: #fff;
 }
 
-/* App wrapper */
+/* ── App wrapper ── */
 .app {
   min-height: 100vh;
   display: flex;
@@ -25,7 +25,7 @@ body {
   overflow: hidden;
 }
 
-/* Background */
+/* ── Background glow ── */
 .app-bg {
   position: fixed;
   inset: 0;
@@ -36,7 +36,7 @@ body {
   z-index: 0;
 }
 
-/* Header */
+/* ── Header ── */
 .app-header {
   text-align: center;
   margin-bottom: 36px;
@@ -67,17 +67,7 @@ body {
   letter-spacing: .04em;
 }
 
-/* Loading spinner */
-.spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-top-color: #0f1117;
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-}
-
-/* Error box */
+/* ── Error box ── */
 .error-box {
   z-index: 1;
   background: rgba(255, 80, 80, 0.12);
@@ -96,7 +86,7 @@ body {
   animation: fadeDown .3s ease both;
 }
 
-/* Empty state */
+/* ── Empty state ── */
 .empty-state {
   z-index: 1;
   margin-top: 48px;
@@ -116,7 +106,7 @@ body {
   color: rgba(255, 255, 255, 0.3);
 }
 
-/* Animations */
+/* ── Animations ── */
 @keyframes fadeDown {
   from {
     opacity: 0;
@@ -130,4 +120,77 @@ body {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* ── Dashboard: side-by-side layout ── */
+.app-dashboard {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+  z-index: 1;
+  animation: fadeDown .5s .1s ease both;
+}
+
+.app-left {
+  flex: 0 0 340px;
+}
+
+.app-left .wc-root {
+  max-width: 100%;
+  margin: 0;
+}
+
+.app-right {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-right .fb-wrap {
+  max-width: 100%;
+  margin: 0;
+}
+
+/* stack on smaller screens */
+@media (max-width: 860px) {
+  .app-dashboard {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .app-left {
+    flex: unset;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .app-right {
+    width: 100%;
+  }
+}
+
+/* ── Equal height: board stretches to match WeatherCard ── */
+.app-left,
+.app-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-left .wc-root,
+.app-left .wc-card {
+  height: 100%;
+}
+
+.app-right .fb-wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-right .fb-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+
+/* big panel */
+.fb-wrap {
+  width: 100%;
+  max-width: 860px;
+  margin: 24px auto 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 28px;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  animation: boardIn .6s .2s cubic-bezier(.22, 1, .36, 1) both;
+  z-index: 1;
+}
+
+/* Header*/
+.fb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.fb-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fb-label {
+  font-family: 'Prompt', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: .01em;
+}
+
+.fb-sublabel {
+  font-family: 'Prompt', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: .04em;
+}
+
+.fb-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.fb-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.fb-dots span:nth-child(1) { background: rgba(255, 95, 87, 0.7); }
+.fb-dots span:nth-child(2) { background: rgba(255, 189, 46, 0.7); }
+.fb-dots span:nth-child(3) { background: rgba(40, 200, 64, 0.7); }
+
+/* Body */
+.fb-body {
+  padding: 24px 24px 20px;
+}
+
+/* Cards grid */
+.fb-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+/* Loading */
+.fb-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 0;
+  font-family: 'Prompt', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.fb-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+/* Error */
+.fb-error {
+  padding: 24px;
+  text-align: center;
+  font-family: 'Prompt', sans-serif;
+  font-size: 14px;
+  color: rgba(255, 100, 100, 0.8);
+}
+
+/* Footer */
+.fb-footer {
+  padding: 12px 28px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'Prompt', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: .04em;
+}
+
+/* each day */
+.fc-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: cardIn .45s cubic-bezier(.22, 1, .36, 1) forwards;
+  cursor: default;
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1),
+              box-shadow .25s ease;
+}
+
+.fc-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* today card is slightly taller / highlighted */
+.fc-card--today {
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.25),
+              0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.fc-card-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--c1), var(--c2));
+  z-index: 0;
+}
+
+/* subtle noise texture overlay */
+.fc-card-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: .4;
+  mix-blend-mode: overlay;
+}
+
+.fc-card-inner {
+  position: relative;
+  z-index: 1;
+  padding: 16px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Card Header */
+.fc-card-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.fc-card-day {
+  font-family: 'Prompt', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: .02em;
+}
+
+.fc-card-date {
+  font-family: 'Prompt', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Icon */
+.fc-card-icon-wrap {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  margin: 4px 0;
+}
+
+.fc-card-icon {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+}
+
+/* Description */
+.fc-card-desc {
+  font-family: 'Prompt', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  line-height: 1.4;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+/* Temperatures */
+.fc-card-temp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 4px 0 2px;
+}
+
+.fc-card-max {
+  font-family: 'Prompt', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.fc-card-divider {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 300;
+}
+
+.fc-card-min {
+  font-family: 'Prompt', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: -0.5px;
+}
+
+/* Stats */
+.fc-card-stats {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.fc-card-stat {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.fc-stat-icon {
+  font-size: 11px;
+}
+
+.fc-stat-val {
+  font-family: 'Prompt', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Humidity bar */
+.fc-hum-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.fc-hum-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width .9s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Animations */
+@keyframes boardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+  .fb-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 460px) {
+  .fb-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fb-body {
+    padding: 16px;
+  }
+}
