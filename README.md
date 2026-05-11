@@ -30,8 +30,6 @@ A web application that displays real-time weather conditions and a 5-day forecas
 
 ---
 
----
-
 ## Prerequisites
 
 - Node.js v18 or higher
